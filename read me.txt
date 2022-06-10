@@ -1,0 +1,7 @@
+Pour acceder au tableau de bord et valider les inscriptions: http://localhost/inscriptionMiage/miage-gi/pages/dashAdmin/index.php
+
+login : admin
+password : 123456
+
+pour s'inscrire en ligne : 
+http://localhost/inscriptionMiage/user/

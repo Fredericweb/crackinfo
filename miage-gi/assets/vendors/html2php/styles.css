@@ -1,0 +1,37 @@
+.container{
+    padding-left: 70px;
+    padding-right: 70px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: max-content;
+    /* visibility: hidden; */
+    
+}
+.head{
+    position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.info{
+    padding-right: 100px;
+    padding-left: 100px;
+}
+.box img{
+    position: relative;
+    width: 100px;
+}
+.recu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.recu .num{
+    color: rgb(231, 66, 66);
+}
+.content{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
