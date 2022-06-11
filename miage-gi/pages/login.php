@@ -33,7 +33,7 @@ echo "<script>alert('nom d'utilisateur incorrect');</script>";
 <html lang="en">
 
 <head>
-    <?php include "head.php"?>
+    <?php include "includes/head.php"?>
 </head>
 
 <body class="bg-transparent">
@@ -71,7 +71,7 @@ echo "<script>alert('nom d'utilisateur incorrect');</script>";
             </div>
         </div>
     </div>
-    <?php include "script.php"?>
+    <?php include "includes/script.php"?>
 </body>
 
 </html>

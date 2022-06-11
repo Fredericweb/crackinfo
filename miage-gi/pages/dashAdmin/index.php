@@ -22,6 +22,51 @@ else{
   $rq2 = mysqli_query($con,"SELECT DISTINCT codeGrp FROM groupe");
   $rst2 = mysqli_num_rows($rq2);
 
+// Freestyle mensonge
+  // $cptw = 0;
+  for($s=1;$s<5;$s++){
+    $rq2 = mysqli_query($con,"SELECT * FROM groupe WHERE idSpe='$s'");
+    $count2 = mysqli_num_rows($rq2);
+    $pre = $s-1;
+    $rqs = mysqli_query($con,"SELECT * FROM groupe WHERE idSpe='$pre'");
+    $count = mysqli_num_rows($rqs);
+
+    $cptw = ceil($count/3);
+    // echo "//$cptw//";
+    
+    $rqparam = mysqli_query($con,"SELECT * FROM parametre");
+    $rstparam = mysqli_fetch_array($rqparam);
+    
+    for($i=0;$i<($count2/3);$i++){
+
+      $codGrp = "$s$i";
+      $prec = $i-1;
+      if($prec<0){
+        $p = $i+1;
+        $grpP = "$pre$p";
+      }else{
+        $grpP = "$s$prec";
+      }
+      $rqpr = mysqli_query($con,"SELECT DISTINCT * FROM groupe WHERE codeGrp='$grpP'");
+      $rspr = mysqli_fetch_array($rqpr);
+      
+      if($rspr['datFin']){
+        $datFinPr = $rspr['datFin'];
+        $Deb = date_create($datFinPr);
+      }else{
+        $datDeb = $rstparam['debutEvent'];
+        $Deb = date_create($datDeb);
+      }
+
+      $newdeb = date_format($Deb,"Y-m-d");
+
+      $debgrp = date_create($newdeb);
+      date_add($debgrp,date_interval_create_from_date_string("1 week"));
+      $fin = date_format($debgrp,"Y-m-d");
+      $sql3 = mysqli_query($con,"update groupe set datdeb='$newdeb', datFin='$fin' where codeGrp='$codGrp'");
+    }
+
+  }
   if(isset($_POST['save']))
       {
          $uname=$_POST['login'];
@@ -52,7 +97,9 @@ else{
     <div class="container-fluid page-body-wrapper">
 
       <!-- header top -->
-      <?php include "includes/header.php"?>
+      <?php 
+      include "includes/header.php"
+      ?>
       <!-- end header -->
      
       <div class="main-panel">
@@ -90,9 +137,39 @@ else{
                   </div>
                 </div>
               </div>
+
+              <button type="button" class="btn btn-sm bg-success btn-icon-text border" data-bs-toggle="modal"
+                  data-bs-target=".bd-example-modal-sm1">
+                  <i class="mdi mdi-tooltip-edit btn-icon-prepend"></i> Parametre event
+                </button>
+                <div class="modal fade bd-example-modal-sm1" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Modifier les informations</h5>
+                        <button type="button" class="btn-close btn" data-bs-dismiss="modal">
+                          <i class="mdi mdi-close"></i>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="includes/edit_param.php" method="post">
+                            <label for="">date fin d'inscription</label>
+                          <input type="date" class="form-control mb-2" name="finIns" id="" placeholder=""  required>
+                            <label for="">Temps de preparation en jours</label>
+                          <input type="number" class="form-control mb-2" name="preparation" id=""placeholder="" required>
+                          <div class="modal-footer">
+                              <input type="submit" name="save" value="Sauvegarder" class="btn btn-primary">
+                          </div>
+                        </form>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
               <?php 
                  if($rst['idRole'] == 1){
-                  echo "<a href='../add_etud.php' class='btn btn-sm ml-3 btn-success'> Definir la date de debut de l'evenement </a>";
+
+                  
                 }
               ?>
             </div>
