@@ -174,7 +174,6 @@
               <?php 
                  if($rst['idRole'] == 1){
 
-                  
                 }
               ?>
             </div>
