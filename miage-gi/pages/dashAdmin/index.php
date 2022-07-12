@@ -1,16 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <?php 
   session_start();
+  
   include "includes/head.php";
   include "../../../config.php";
+  require '../../ajax-phpmail/class/class.phpmailer.php';
+  
 
   if(strlen($_SESSION['idAdmin'])==0)
   { 
     header('location:../login.php');
   }
-else{
+  else{
 
   $idadmin = $_SESSION['idAdmin'];
   $query = mysqli_query($con,"SELECT * FROM admininfo WHERE idAdmin='$idadmin'");
@@ -22,8 +26,7 @@ else{
   $rq2 = mysqli_query($con,"SELECT DISTINCT codeGrp FROM groupe");
   $rst2 = mysqli_num_rows($rq2);
 
-// Freestyle mensonge
-  // $cptw = 0;
+  // generateur de date de passage groupes
   for($s=1;$s<5;$s++){
     $rq2 = mysqli_query($con,"SELECT * FROM groupe WHERE idSpe='$s'");
     $count2 = mysqli_num_rows($rq2);
@@ -32,7 +35,6 @@ else{
     $count = mysqli_num_rows($rqs);
 
     $cptw = ceil($count/3);
-    // echo "//$cptw//";
     
     $rqparam = mysqli_query($con,"SELECT * FROM parametre");
     $rstparam = mysqli_fetch_array($rqparam);
@@ -47,6 +49,7 @@ else{
       }else{
         $grpP = "$s$prec";
       }
+
       $rqpr = mysqli_query($con,"SELECT DISTINCT * FROM groupe WHERE codeGrp='$grpP'");
       $rspr = mysqli_fetch_array($rqpr);
       
@@ -65,8 +68,12 @@ else{
       $fin = date_format($debgrp,"Y-m-d");
       $sql3 = mysqli_query($con,"update groupe set datdeb='$newdeb', datFin='$fin' where codeGrp='$codGrp'");
     }
-
   }
+  
+    
+  }
+
+  // modificateur d'information de connexion
   if(isset($_POST['save']))
       {
          $uname=$_POST['login'];
@@ -357,4 +364,3 @@ else{
 
 </html>
 
-<?php }?>

@@ -50,8 +50,8 @@
                                                 <th>Nom</th>
                                                 <th>Prenom</th>
                                                 <th>Classe</th>
+                                                <th>Travaux</th>
                                                 <th>Note</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -87,6 +87,11 @@
                                                             $row2 = mysqli_query($con, "SELECT * FROM niveau WHERE idNiv = '$idNiv'");
                                                             $rst2 = mysqli_fetch_array($row2);
 
+                                                            // recuperation des travaux 
+                                                            $spe = $result['idSpe'];
+                                                            $row3 = mysqli_query($con, "SELECT * FROM travaux WHERE idSpe = '$spe'");
+                                                            $rst3 = mysqli_fetch_array($row3);
+
                                                 ?>
                                             <tr>
                                                 <td>
@@ -100,6 +105,16 @@
                                                 </td>
                                                 <td>
                                                     <?=$rst2['libNiv']?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        if($idPart == $rst3['idPart']){
+                                                    ?>
+                                                    <a class="btn btn-icon-text btn-success" href="../../user/assets/Travaux/<?=$rst3['Travaux']?>">
+                                                    <i class="mdi mdi-download"></i>
+                                                    Travaux</a>
+
+                                                    <?php } ?>
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-info btn-icon-text"
@@ -139,7 +154,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td></td>
+                                                
                                             </tr>
                                             <?php 
                                              $cpt++;

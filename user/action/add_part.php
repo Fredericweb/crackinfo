@@ -6,7 +6,21 @@
     // en cas de click sur le button s'inscrire
     if(isset($_POST['save'])){
 
-        // recuperation des variables saisis dans les input
+        // recuperation de la date de debut
+        $sql = mysqli_query($con,"SELECT * FROM parametre");
+        $result = mysqli_fetch_array($sql);
+        $datedeb = $result['finInscrpt'];
+        $d = date_create($datedeb);
+        $fin = date_format($d,"Y-m-d");
+        
+        // date du jour
+        $day = date("Y-m-d");
+        
+        // verification
+        if($fin<=$day){
+           echo "<script>alert('Les inscriptions sont terminées');</script>";
+        }else{
+            // recuperation des variables saisis dans les input
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $email = $_POST['mail'];
@@ -120,4 +134,10 @@
            echo "Message sent successfully!";
         }
         echo "<script>alert('Informations enregistées !!!');</script>";
+        }
+        
     }
+?>
+    <!-- <script language="javascript">
+    document.location="../inscription.php";
+    </script> -->

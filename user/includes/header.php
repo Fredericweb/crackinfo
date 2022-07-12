@@ -19,6 +19,31 @@
                     <li class="nav__item">
                         <a href="login.php" class="btn_nav__link">Conexion</a>
                     </li>
+                    <?php
+                        // recuperation de la date de debut
+                        $sql = mysqli_query($con,"SELECT * FROM parametre");
+                        $result = mysqli_fetch_array($sql);
+                        $datedeb = $result['debutEvent'];
+                        $d = date_create($datedeb);
+                        
+                        // calcul date de fin
+                        $sql1 = mysqli_query($con,"SELECT * FROM groupe");
+                        $count = mysqli_num_rows($sql1);
+                        $cptw = ceil($count/3);
+                        date_add($d,date_interval_create_from_date_string("$cptw week"));
+                        $resultat = date_format($d,"Y-m-d");
+
+                        // date du jour
+                        $day = date("Y-m-d");
+                        
+                        // verification
+                        if($resultat<=$day){
+                    ?>
+                     <li class="nav__item">
+                        <a href="" class="btn_nav__link">Resultat</a>
+                    </li>
+                    <?php } ?>
+
                 </ul>
 
                 <div class="nav__dark">

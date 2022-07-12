@@ -3,6 +3,7 @@
 
 <head>
     <?php 
+     include "../config.php";
      include "includes/head.php";
     ?>
 
