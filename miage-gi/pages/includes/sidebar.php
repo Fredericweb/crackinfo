@@ -35,13 +35,19 @@
         <li class='nav-item'>
           <a class='nav-link' href='manageGrp.php'>
             <i class='mdi mdi-contacts menu-icon'></i>
-            <span class='menu-title'>Groupes de passage</span>
+            <span class='menu-title'>Groupes</span>
           </a>
         </li>
         <li class='nav-item'>
           <a class='nav-link' href='ListPersl.php'>
             <i class='mdi mdi-format-list-bulleted menu-icon'></i>
             <span class='menu-title'>Liste du personnel</span>
+          </a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='GrpPassD.php'>
+            <i class='mdi mdi-format-list-bulleted menu-icon'></i>
+            <span class='menu-title'>Groupe de passage</span>
           </a>
         </li>
         <li class='nav-item'>

@@ -138,13 +138,29 @@
                         <div class="d-flex justify-content-between align-items-start">
                           <div class="color-card">
                             <p class="mb-0 color-card-head">Date(s) de passage</p>
-                            <!-- <h2 class="text-white"> $1,753.<span class="h5">00</span>
-                            </h2> -->
+                            <?php
+                              $rq = mysqli_query($con,"SELECT * FROM choix WHERE idPart = '$idPart'");
+                              $count = mysqli_num_rows($rq);
+                              $rq3 = mysqli_query($con,"SELECT * FROM groupe WHERE idPart = '$idPart'");
+                              
+                            ?>
                           </div>
                           <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
                         </div>
-                        <h6 class="text-white">Big data : 22/06/2022</h6>
-                        <h6 class="text-white">web et mobile : 22/06/2022</h6>
+                        <?php 
+                          while($rqrst3 = mysqli_fetch_array($rq3)){
+                            $idSpe = $rqrst3['idSpe'];
+                            $sql2= mysqli_query($con,"SELECT * FROM specificite WHERE idSpe='$idSpe'");
+                            $result2= mysqli_fetch_array($sql2);
+
+                            $datdeb = $rqrst3['datdeb'];
+                            $dat= date_create($datdeb);
+                            date_add($dat,date_interval_create_from_date_string("4 days"));
+                            $datpass = date_format($dat,"Y-m-d");
+                        ?>
+                        <h6 class="text-white"><?=$result2['libSpe']?> : <?=$datpass?></h6>
+                        <?php }?>
+                       
 
                       </div>
                     </div>
@@ -157,7 +173,8 @@
                     <div class="row">
                       <div class="col-sm-7">
                         <h5>informations</h5>
-                        <p class="text-muted"> Durée de l'evenement jan 2018 - Dec 2019 
+                        <p class="text-muted"> 
+                          <!-- Durée de l'evenement jan 2018 - Dec 2019  -->
                         </p>
                       </div>
                       <div class="col-sm-5 text-md-right">
@@ -180,19 +197,67 @@
                                 </tr>
                               </thead>
                               <tbody>
+                              <?php 
+                               $cpt = 0;
+                              $rq4 = mysqli_query($con,"SELECT * FROM choix WHERE idPart = '$idPart'");
+                              $count = mysqli_num_rows($rq);
+                              $rq5 = mysqli_query($con,"SELECT * FROM groupe WHERE idPart = '$idPart'");
+
+                            while($rqrst4 = mysqli_fetch_array($rq4)){
+                              $idSpe = $rqrst4['idSpe'];
+                              $sql5= mysqli_query($con,"SELECT * FROM specificite WHERE idSpe='$idSpe'");
+                              $result5 = mysqli_fetch_array($sql5);
+
+                              $rsrq5 = mysqli_fetch_array( $rq5);
+                            ?>
                                 <tr>
                                   <td>
-                                    Big data
+                                    <?=$result5['libSpe']?>
                                   </td>
-                                  <td>22/06/2022</td>
                                   <td>
-                                    <button class="btn btn-success">Travaux</button>                                  
+                                    <?php
+                                       $datdeb = $rsrq5['datdeb'];
+                                       $dat= date_create($datdeb);
+                                       date_add($dat,date_interval_create_from_date_string("4 days"));
+                                       $datpass = date_format($dat,"Y-m-d");
+                                       echo $datpass;
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                      data-bs-target=".bd-example-modal-sm<?=$cpt?>">
+                                      <i class="mdi mdi-tooltip-edit btn-icon-prepend"></i> Travaux
+                                    </button>
+                                    <div class="modal fade bd-example-modal-sm<?=$cpt?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                      <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title">Modifier les informations</h5>
+                                            <button type="button" class="btn-close btn" data-bs-dismiss="modal">
+                                              <i class="mdi mdi-close"></i>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <form action="includes/add_Travaux" method="post">
+                                              <input type="file" class="form-control mb-2" name="Travaux" id="" placeholder="Travaux" required>
+                                              <input type="hidden" name="spe" value="<?=$idSpe?>">
+                                              <div class="modal-footer">
+                                                  <input type="submit" name="save" value="Sauvegarder" class="btn btn-primary">
+                                              </div>
+                                            </form>
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
                                   </td>
                                   <td>
                                     <button class="btn btn-primary">note</button>
                                   </td>
                                 </tr>
-                                
+                                <?php 
+                              $cpt++ ;
+                              }?>
                               </tbody>
                             </table>
                           </div>

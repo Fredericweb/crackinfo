@@ -21,30 +21,6 @@
           </a>
         </li>
         <li class='nav-item'>
-          <a class='nav-link' href='index.php'>
-            <i class='mdi mdi-home menu-icon'></i>
-            <span class='menu-title'>Dashboard</span>
-          </a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href='../managePart.php'>
-            <i class='mdi mdi-account menu-icon'></i>
-            <span class='menu-title'>Participant</span>
-          </a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href='../manageGrp.php'>
-            <i class='mdi mdi-contacts menu-icon'></i>
-            <span class='menu-title'>Groupes</span>
-          </a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href='../ListPersl.php'>
-            <i class='mdi mdi-format-list-bulleted menu-icon'></i>
-            <span class='menu-title'>Liste du personnel</span>
-          </a>
-        </li>
-        <li class='nav-item'>
           <a class='nav-link' href='../GrpPassD.php'>
             <i class='mdi mdi-format-list-bulleted menu-icon'></i>
             <span class='menu-title'>Groupe de passage</span>

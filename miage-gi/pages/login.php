@@ -17,7 +17,12 @@ if($num>0)
 
 if ($password == $num['password']) {
     $_SESSION['idAdmin']=$num['idAdmin'];
-    echo "<script type='text/javascript'> document.location = 'dashAdmin/index.php'; </script>";
+    if($_SESSION['idAdmin']==2){
+        echo "<script type='text/javascript'> document.location = 'GrpPassD.php'; </script>";
+    }else{
+        echo "<script type='text/javascript'> document.location = 'dashAdmin/index.php'; </script>";
+    }
+   
 } else {
     echo "<script>alert('mot de passe incorrect');</script>";
   }

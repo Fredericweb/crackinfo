@@ -32,7 +32,7 @@
                 <span class="profile-name"><?=$rst['nom']?> <?=$rst['prenom']?></span>
               </a>
               <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="../logout.php">
+                <a class="dropdown-item" href="logout.php">
                   <i class="mdi mdi-logout mr-3 text-primary"></i> deconnecter
                 </a>
               </div>

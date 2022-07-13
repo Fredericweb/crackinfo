@@ -85,9 +85,7 @@ else{
     <!-- side bar -->
     <?php
     if($rst['idRole'] == 2){
-      include "sidebarSec.php";
-    }elseif($rst['idRole'] == 3){
-      include "sidebarCompt.php";
+      include "includes/sidebarJury.php";
     }else{
       include "includes/sidebar.php";
     }
